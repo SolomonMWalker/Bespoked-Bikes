@@ -1,5 +1,6 @@
 ﻿namespace Models
 {
+    //class containing information we want to display in DisplayCommissionReportsView
     public class SalespersonCommissionReport
     {
         public int SalespersonId { get; set; }

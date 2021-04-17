@@ -14,6 +14,7 @@ namespace Service
             queries = queries ?? new Queries();
         }
 
+        //small private method to get quarter dates
         private Tuple<DateTime, DateTime> GetStartAndEndDateForQuarter(int quarter, int year)
         {
             DateTime startDate, endDate;

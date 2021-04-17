@@ -7,6 +7,7 @@ namespace Data
 {
     public class Queries
     {
+        //only need one instance for db accessing
         private static DatabaseContext DBContext;
 
         public Queries()
@@ -29,6 +30,7 @@ namespace Data
             return DBContext.Salespeople.Where(x => x.SalespersonId == salespersonId).FirstOrDefault();
         }
 
+        //as long as a single field below is unique, returns true
         public bool IsSalespersonUnique(Salesperson sp)
         {
             var isFirstNameUnique = DBContext.Salespeople.Where(s => s.FirstName == sp.FirstName).Count() == 0;
@@ -47,6 +49,7 @@ namespace Data
             }
         }
 
+        //allows addition or creation, but the app only supports updating at the moment
         public void AddOrUpateSalesperson(Salesperson sp)
         {
             if (DBContext.Salespeople.Select(x => x.SalespersonId).Contains(sp.SalespersonId))
@@ -82,6 +85,7 @@ namespace Data
             return DBContext.Products.Where(x => x.ProductId == productId).FirstOrDefault();
         }
 
+        //as long as a single field below is unique, returns true
         public bool IsProductUnique(Product product)
         {
             var isNameUnique = DBContext.Products.Where(p => p.Name == product.Name).Count() == 0;
@@ -100,6 +104,7 @@ namespace Data
             }
         }
 
+        //allows addition or creation, but the app only supports updating at the moment
         public void AddOrUpdateProduct(Product p)
         {
             if (DBContext.Products.Select(x => x.ProductId).Contains(p.ProductId))
@@ -131,6 +136,7 @@ namespace Data
             return customersList;
         }
 
+        //uses optional parameters and null coalesces to effectively allow passing or not passing parameters
         public List<DisplaySale> GetSales(DateTime? startDateRangeDate = null, DateTime? endDateRangeDate = null)
         {
             var startDateNotNull = startDateRangeDate ?? DateTime.MinValue;
@@ -161,22 +167,26 @@ namespace Data
             DBContext.SaveChanges();
         }
 
+        //Used to increment new sale ids
         public int GetLastSaleId()
         {
             var lastSaleId = DBContext.Sales.Select(x => x.SaleId).ToList().Max();
             return lastSaleId;
         }
 
+        //for sales creation
         public List<int> GetProductIds()
         {
             return DBContext.Products.Select(x => x.ProductId).ToList();
         }
 
+        //for sales creation
         public List<int> GetSalespeopleIds()
         {
             return DBContext.Salespeople.Select(x => x.SalespersonId).ToList();
         }
 
+        //for sales creation
         public List<int> GetCustomerIds()
         {
             return DBContext.Customers.Select(x => x.CustomerId).ToList();
