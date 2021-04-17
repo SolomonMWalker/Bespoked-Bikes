@@ -3,15 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Service;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
     public class ProductsController : Controller
     {
         private ProductService productService;
+
         public ProductsController(ProductService pService)
         {
             productService = pService;
@@ -23,7 +21,6 @@ namespace Client.Controllers
             var products = productService.GetProducts();
             return View("DisplayProductsView", products);
         }
-
 
         // GET: ProductsController/Edit/5
         public ActionResult Edit(int id)

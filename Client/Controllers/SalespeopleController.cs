@@ -3,15 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 using Models;
 using Service;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Client.Controllers
 {
     public class SalespeopleController : Controller
     {
         private SalespersonService salespersonService;
+
         public SalespeopleController(SalespersonService spService)
         {
             salespersonService = spService;
@@ -61,13 +59,13 @@ namespace Client.Controllers
 
             try
             {
-                if(!salespersonService.UpdateSalesperson(salesperson))
+                if (!salespersonService.UpdateSalesperson(salesperson))
                 {
                     throw (new Exception("Failure to update salesperson. Check the database connection or if you are creating a duplicate salesperson."));
                 }
                 return RedirectToAction(nameof(Index));
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 var error = new Models.ErrorViewModel();
                 error.ErrorMessage = e.Message;

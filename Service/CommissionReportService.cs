@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Data;
+﻿using Data;
 using Models;
-
+using System;
+using System.Collections.Generic;
 
 namespace Service
 {
@@ -28,14 +24,17 @@ namespace Service
                     startDate = new DateTime(year, 1, 1);
                     endDate = new DateTime(year, 3, 31);
                     break;
+
                 case 2:
                     startDate = new DateTime(year, 4, 1);
                     endDate = new DateTime(year, 6, 30);
                     break;
+
                 case 3:
                     startDate = new DateTime(year, 7, 1);
                     endDate = new DateTime(year, 9, 30);
                     break;
+
                 default:
                     startDate = new DateTime(year, 10, 1);
                     endDate = new DateTime(year, 12, 31);

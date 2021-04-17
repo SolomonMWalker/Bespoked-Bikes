@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{8B2F9D5B-43E9-4793-84BD-963D5AF341F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{64F6FA79-3CA6-4305-B1DC-DB5768D7AE90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "Client\Client.csproj", "{64F6FA79-3CA6-4305-B1DC-DB5768D7AE90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Configuration", "Configuration\Configuration.csproj", "{7BC502C1-8345-47F0-BE37-E7C307AC4A24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{64F6FA79-3CA6-4305-B1DC-DB5768D7AE90}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64F6FA79-3CA6-4305-B1DC-DB5768D7AE90}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64F6FA79-3CA6-4305-B1DC-DB5768D7AE90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BC502C1-8345-47F0-BE37-E7C307AC4A24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BC502C1-8345-47F0-BE37-E7C307AC4A24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BC502C1-8345-47F0-BE37-E7C307AC4A24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BC502C1-8345-47F0-BE37-E7C307AC4A24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

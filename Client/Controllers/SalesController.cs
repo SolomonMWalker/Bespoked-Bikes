@@ -1,18 +1,17 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Service;
-using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Models;
+using Service;
+using System;
+using System.Linq;
 
 namespace Client.Controllers
 {
     public class SalesController : Controller
     {
         private SalesService salesService;
+
         public SalesController(SalesService sService)
         {
             salesService = sService;

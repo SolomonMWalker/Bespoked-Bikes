@@ -17,7 +17,6 @@ namespace Data
             }
         }
 
-
         public List<Salesperson> GetSalespeople()
         {
             IQueryable<Salesperson> salespeopleQuery = from s in DBContext.Salespeople select s;
@@ -50,7 +49,7 @@ namespace Data
 
         public void AddOrUpateSalesperson(Salesperson sp)
         {
-            if(DBContext.Salespeople.Select(x => x.SalespersonId).Contains(sp.SalespersonId))
+            if (DBContext.Salespeople.Select(x => x.SalespersonId).Contains(sp.SalespersonId))
             {
                 var salesperson = (
                     from s in DBContext.Salespeople
@@ -214,6 +213,5 @@ namespace Data
 
             return commissionReportQuery.ToList();
         }
-
     }
 }

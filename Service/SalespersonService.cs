@@ -1,10 +1,6 @@
 ﻿using Data;
 using Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service
 {
@@ -29,7 +25,7 @@ namespace Service
 
         public bool UpdateSalesperson(Salesperson s)
         {
-            if(queries.IsSalespersonUnique(s))
+            if (queries.IsSalespersonUnique(s))
             {
                 queries.AddOrUpateSalesperson(s);
                 return true;
@@ -39,7 +35,5 @@ namespace Service
                 return false;
             }
         }
-
-
     }
 }
