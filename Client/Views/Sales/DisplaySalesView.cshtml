@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Models.DisplaySale>
+
+@{
+    ViewData["Title"] = "Display Sales";
+}
+
+<h1>Display Sales</h1>
+
+<form asp-action="FilteredIndex">
+    <label for="startDate">Start Date in MM/DD/YYYY: </label>
+    <input type="text" id="startDate" name="startDate" />
+    <label for="endDate">End Date in MM/DD/YYYY: </label>
+    <input type="text" id="endDate" name="endDate" />
+    <input type="submit" value="Filter Sales By Date" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaleDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalePrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalespersonId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalespersonCommission)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CustomerId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SaleDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalePrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalespersonId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalespersonCommission)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

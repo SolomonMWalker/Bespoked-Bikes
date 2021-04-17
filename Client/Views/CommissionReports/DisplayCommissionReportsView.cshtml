@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Models.SalespersonCommissionReport>
+
+@{
+    ViewData["Title"] = "Display Commission Reports";
+}
+
+<h1>Display Commission Reports</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SalespersonId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalespersonFullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QuarterYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SalesCommissionAmount)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalespersonId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalespersonFullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QuarterYear)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SalesCommissionAmount)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -13,5 +13,13 @@ namespace Models
         public int Quarter { get; set; }
         public int Year { get; set; }
         public float SalesCommissionAmount { get; set; }
+
+        public string QuarterYear
+        {
+            get
+            {
+                return Quarter.ToString() + " " + Year.ToString();
+            }
+        }
     }
 }

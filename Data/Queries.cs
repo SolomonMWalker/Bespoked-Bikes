@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Data
 {
-    class Queries
+    public class Queries
     {
         private static DatabaseContext DBContext;
 
@@ -25,6 +25,11 @@ namespace Data
             return salespeopleList;
         }
 
+        public Salesperson GetSalesperson(int salespersonId)
+        {
+            return DBContext.Salespeople.Where(x => x.SalespersonId == salespersonId).FirstOrDefault();
+        }
+
         public bool IsSalespersonUnique(Salesperson sp)
         {
             var isFirstNameUnique = DBContext.Salespeople.Where(s => s.FirstName == sp.FirstName).Count() == 0;
@@ -33,7 +38,7 @@ namespace Data
             var isPhoneNumberUnique = DBContext.Salespeople.Where(s => s.Phone == sp.Phone).Count() == 0;
             var isStartDateUnique = DBContext.Salespeople.Where(s => s.StartDate == sp.StartDate).Count() == 0;
 
-            if (isFirstNameUnique && isLastNameUnique && isAddressUnique && isPhoneNumberUnique && isStartDateUnique)
+            if (isFirstNameUnique || isLastNameUnique || isAddressUnique || isPhoneNumberUnique || isStartDateUnique)
             {
                 return true;
             }
@@ -43,9 +48,26 @@ namespace Data
             }
         }
 
-        public void AddSalesperson(Salesperson sp)
+        public void AddOrUpateSalesperson(Salesperson sp)
         {
-            DBContext.Salespeople.Add(sp);
+            if(DBContext.Salespeople.Select(x => x.SalespersonId).Contains(sp.SalespersonId))
+            {
+                var salesperson = (
+                    from s in DBContext.Salespeople
+                    where s.SalespersonId == sp.SalespersonId
+                    select s).SingleOrDefault();
+                salesperson.FirstName = sp.FirstName;
+                salesperson.LastName = sp.LastName;
+                salesperson.Address = sp.Address;
+                salesperson.Phone = sp.Phone;
+                salesperson.StartDate = sp.StartDate;
+                salesperson.TerminationDate = sp.TerminationDate;
+                salesperson.Manager = sp.Manager;
+            }
+            else
+            {
+                DBContext.Salespeople.Add(sp);
+            }
             DBContext.SaveChanges();
         }
 
@@ -56,6 +78,11 @@ namespace Data
             return productsList;
         }
 
+        public Product GetProduct(int productId)
+        {
+            return DBContext.Products.Where(x => x.ProductId == productId).FirstOrDefault();
+        }
+
         public bool IsProductUnique(Product product)
         {
             var isNameUnique = DBContext.Products.Where(p => p.Name == product.Name).Count() == 0;
@@ -64,7 +91,7 @@ namespace Data
             var isPurchasePriceUnique = DBContext.Products.Where(p => p.PurchasePrice == product.PurchasePrice).Count() == 0;
             var isStyleUnique = DBContext.Products.Where(p => p.Style == product.Style).Count() == 0;
 
-            if (isNameUnique && isManufacturerUnique && isSalePriceUnique && isPurchasePriceUnique && isStyleUnique)
+            if (isNameUnique || isManufacturerUnique || isSalePriceUnique || isPurchasePriceUnique || isStyleUnique)
             {
                 return true;
             }
@@ -74,9 +101,27 @@ namespace Data
             }
         }
 
-        public void AddProduct(Product p)
+        public void AddOrUpdateProduct(Product p)
         {
-            DBContext.Add(p);
+            if (DBContext.Products.Select(x => x.ProductId).Contains(p.ProductId))
+            {
+                var product = (
+                    from pr in DBContext.Products
+                    where pr.ProductId == p.ProductId
+                    select pr).SingleOrDefault();
+                product.Manufacturer = p.Manufacturer;
+                product.Style = p.Style;
+                product.SalePrice = p.SalePrice;
+                product.PurchasePrice = p.PurchasePrice;
+                product.QtyOnHand = p.QtyOnHand;
+                product.CommissionPercentage = p.CommissionPercentage;
+                product.Name = p.Name;
+            }
+            else
+            {
+                DBContext.Products.Add(p);
+            }
+
             DBContext.SaveChanges();
         }
 
@@ -117,30 +162,8 @@ namespace Data
             DBContext.SaveChanges();
         }
 
-        public List<SalespersonCommissionReport> GetQuarterlyCommissionReport(int quarter, int year)
+        public List<SalespersonCommissionReport> GetQuarterlyCommissionReport(DateTime startDate, DateTime endDate, int quarter, int year)
         {
-            DateTime startDate, endDate;
-
-            switch(quarter)
-            {
-                case 1:
-                    startDate = new DateTime(year, 1, 1);
-                    endDate = new DateTime(year, 3, 31);
-                    break;
-                case 2:
-                    startDate = new DateTime(year, 4, 1);
-                    endDate = new DateTime(year, 6, 30);
-                    break;
-                case 3:
-                    startDate = new DateTime(year, 7, 1);
-                    endDate = new DateTime(year, 9, 30);
-                    break;
-                default:
-                    startDate = new DateTime(year, 10, 1);
-                    endDate = new DateTime(year, 12, 31);
-                    break;
-            }
-
             var sales = GetSales(startDate, endDate);
 
             var salesInQuarterQuery =
