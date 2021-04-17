@@ -162,6 +162,27 @@ namespace Data
             DBContext.SaveChanges();
         }
 
+        public int GetLastSaleId()
+        {
+            var lastSaleId = DBContext.Sales.Select(x => x.SaleId).ToList().Max();
+            return lastSaleId;
+        }
+
+        public List<int> GetProductIds()
+        {
+            return DBContext.Products.Select(x => x.ProductId).ToList();
+        }
+
+        public List<int> GetSalespeopleIds()
+        {
+            return DBContext.Salespeople.Select(x => x.SalespersonId).ToList();
+        }
+
+        public List<int> GetCustomerIds()
+        {
+            return DBContext.Customers.Select(x => x.CustomerId).ToList();
+        }
+
         public List<SalespersonCommissionReport> GetQuarterlyCommissionReport(DateTime startDate, DateTime endDate, int quarter, int year)
         {
             var sales = GetSales(startDate, endDate);

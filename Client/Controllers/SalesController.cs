@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Client.Controllers
 {
@@ -33,21 +34,35 @@ namespace Client.Controllers
         // GET: SalesController/Create
         public ActionResult Create()
         {
-            return View();
+            ViewBag.ProductIds = salesService.GetProductIds().Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
+            ViewBag.SalespersonIds = salesService.GetSalespersonIds().Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
+            ViewBag.CustomerIds = salesService.GetCustomerIds().Select(x => new SelectListItem { Text = x.ToString(), Value = x.ToString() });
+            return View("CreateSaleView");
         }
 
         // POST: SalesController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult CreateSale(IFormCollection collection)
         {
+            var sale = new Sale
+            {
+                ProductId = Int32.Parse(collection["ProductId"]),
+                SalespersonId = Int32.Parse(collection["SalespersonId"]),
+                CustomerId = Int32.Parse(collection["CustomerId"]),
+                SalesDate = DateTime.Parse(collection["SalesDate"])
+            };
+
             try
             {
+                salesService.CreateSale(sale);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception e)
             {
-                return View();
+                var error = new Models.ErrorViewModel();
+                error.ErrorMessage = "Failure to create sale. Check the database connection or if you are entering valid values.";
+                return View("Error", error);
             }
         }
     }

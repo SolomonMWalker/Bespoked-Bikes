@@ -24,7 +24,23 @@ namespace Service
 
         public void CreateSale(Sale s)
         {
+            s.SaleId = queries.GetLastSaleId() + 1;
             queries.AddSale(s);
+        }
+
+        public List<int> GetProductIds()
+        {
+            return queries.GetProductIds();
+        }
+
+        public List<int> GetSalespersonIds()
+        {
+            return queries.GetSalespeopleIds();
+        }
+
+        public List<int> GetCustomerIds()
+        {
+            return queries.GetCustomerIds();
         }
     }
 }

@@ -6,11 +6,15 @@
 
 <h1>Display Sales</h1>
 
+<a asp-controller="Sales" asp-action="Create">
+    <input type="button" class="btn btn-primary" value="Create a Sale" />
+</a>
+
 <form asp-action="FilteredIndex">
     <label for="startDate">Start Date in MM/DD/YYYY: </label>
-    <input type="text" id="startDate" name="startDate" />
+    <input type="text" id="startDate" name="startDate" required/>
     <label for="endDate">End Date in MM/DD/YYYY: </label>
-    <input type="text" id="endDate" name="endDate" />
+    <input type="text" id="endDate" name="endDate" required/>
     <input type="submit" value="Filter Sales By Date" />
 </form>
 

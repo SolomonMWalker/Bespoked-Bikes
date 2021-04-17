@@ -4,7 +4,8 @@
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <img src="~/BeSpokedBikesImage.jpg" alt="Its bikes y'all" />
+    <p>BeSpoked Bikes all encompassing incredible application!</p>
     <a asp-controller="Salespeople" asp-action="Index">
         <input type="button" class="btn btn-primary" value="Display Salespeople" />
     </a>
@@ -22,9 +23,9 @@
     </a>
     <form asp-controller="CommissionReports" asp-action="Index">
         <label for="quarter">Quarter</label>
-        <input type="text" id="quarter" name="quarter" />
+        <input type="text" id="quarter" name="quarter" required/>
         <label for="year">Year</label>
-        <input type="text" id="year" name="year" />
+        <input type="text" id="year" name="year" required/>
         <input type="submit" value="See Commission Reports For Quarter And Year" />
     </form>
 </div>
